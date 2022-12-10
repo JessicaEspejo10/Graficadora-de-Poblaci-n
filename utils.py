@@ -1,34 +1,20 @@
 import matplotlib.pyplot as plt
-import csv
 
-def get_population():
-  keys = ['col', 'bol']
-  values = [300, 450]
-  return keys, values
+def get_population(country_dict):
+  population_dict = {
+    '2022': country_dict['2022 Population'], 
+    '2020': country_dict['2020 Population'],  
+    '2015': country_dict['2015 Population'],  
+    '2010': country_dict['2010 Population'],  
+    '2000': country_dict['2000 Population'], 
+    '1990': country_dict['1990 Population'],  
+    '1980': country_dict['1980 Population'], 
+    '1970': country_dict['1970 Population']
+  }
+  labels = population_dict.keys()
+  values = population_dict.values()
+  return labels, values
 
 def population_by_country(country, data):
-  result = list(filter(lambda item: item['Country'] == country, data))
+  result = list(filter(lambda item: item['Country/Territory'] == country, data))
   return result
-
- 
-def generate_bar_chart(labels, values):
-  fig, ax = plt.subplots()
-  ax.bar(labels, values)
-  plt.show()
-
-def generate_pie_chart(labels, values):
-  fig, ax = plt.subplots()
-  ax.pie(values, labels = labels)
-  ax.axis('equal')
-  plt.show()
-
-def read_csv(path):
-  with open(path, 'r') as csvfile:
-    reader = csv.reader(csvfile, delimiter = ',')
-    header = next(reader)
-    data = []
-    for row in reader:
-      iterable = zip(header,row)
-      country_dict = {key: value for key, value in iterable}
-      data.append(country_dict)
-    return data
