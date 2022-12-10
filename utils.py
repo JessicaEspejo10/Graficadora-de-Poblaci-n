@@ -2,14 +2,14 @@ import matplotlib.pyplot as plt
 
 def get_population(country_dict):
   population_dict = {
-    '2022': country_dict['2022 Population'], 
-    '2020': country_dict['2020 Population'],  
-    '2015': country_dict['2015 Population'],  
-    '2010': country_dict['2010 Population'],  
-    '2000': country_dict['2000 Population'], 
-    '1990': country_dict['1990 Population'],  
-    '1980': country_dict['1980 Population'], 
-    '1970': country_dict['1970 Population']
+    '2022': int(country_dict['2022 Population']), 
+    '2020': int(country_dict['2020 Population']),  
+    '2015': int(country_dict['2015 Population']),  
+    '2010': int(country_dict['2010 Population']),  
+    '2000': int(country_dict['2000 Population']), 
+    '1990': int(country_dict['1990 Population']),  
+    '1980': int(country_dict['1980 Population']), 
+    '1970': int(country_dict['1970 Population'])
   }
   labels = population_dict.keys()
   values = population_dict.values()
@@ -18,3 +18,11 @@ def get_population(country_dict):
 def population_by_country(country, data):
   result = list(filter(lambda item: item['Country/Territory'] == country, data))
   return result
+
+def get_world_percentage(data):
+
+  percent_dict = {item['Country/Territory']: item ['World Population Percentage'] for item in data}
+  
+  labels = percent_dict.keys()
+  values = percent_dict.values()
+  return labels, values
