@@ -13,20 +13,23 @@ def run_country_population(data):
    
   #print(result)
 def run_percent_population(data):
-  #ORDENAR DE MAYOR A MENOR Y FILTRAR POR CANTIDAD DE PAISES A MOSTRAR/CONTINENTES
-  #data = list(filter(lambda item: item['Continent'] == 'South America', data))
   # como hacer que las etiquetas no se vean montadas, ajustar etiquetas y mostrar valores
   labels, values = utils.get_world_percentage(data)
   chart.generate_pie_chart(labels, values)
 
+def run_continent_percent(data):
+  labels, values = utils.get_continent_percentage(data)
+  chart.generate_pie_chart(labels, values)
+
 def menu(data):
-  print('BIENVENIDO A LA GRAFICADORA DE POBLACIÓN\n')
-  print('________________________________________________\n')
-  option = input('Digite 1 si desea graficar la población histórica de un país, o 2 si desea graficar el porcentaje de población numndial por paises: ')
+  print('\nBIENVENIDO A LA GRAFICADORA DE POBLACIÓN\n')
+  option = input('---------Menú ---------\n 1 - Graficar la población histórica de un país específico \n 2 - Graficar porcentaje de población por paises \n 3 - Graficar porcentaje de población por Continente\n')
   if option == '1':
     run_country_population(data)
   elif option == '2':
     run_percent_population(data)
+  elif option == '3':
+    run_continent_percent(data)
   else:
     print('La opción que ingresó no es válida')
     menu(data)
