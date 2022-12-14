@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from collections import OrderedDict
 
 def get_population(country_dict):
   population_dict = {
@@ -19,10 +20,18 @@ def population_by_country(country, data):
   result = list(filter(lambda item: item['Country/Territory'] == country, data))
   return result
 
-def get_world_percentage(data):
-
+def get_world_percentage(data, num_countries):
   percent_dict = {item['Country/Territory']: item ['World Population Percentage'] for item in data}
-  
+  sorted_percent = OrderedDict(sorted(percent_dict.items(), key = lambda item: item[1], reverse = True))
+  percent_res = dict(list(sorted_percent.items())[0:num_countries])  
+  labels = percent_res.keys()
+  values = percent_res.values()
+  return labels, values
+
+def get_continent_percentage(data, continent):
+  data = list(filter(lambda item : item ['Continent'] == continent, data))
+  percent_dict = {item['Country/Territory']: item ['World Population Percentage'] for item in data}
   labels = percent_dict.keys()
   values = percent_dict.values()
   return labels, values
+
